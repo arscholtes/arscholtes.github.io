@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alex Scholtes — Software Engineer</title>
+<meta name="description" content="Software engineer. Ships product in a production Rails monolith, and builds the tooling that makes the next release faster.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400;12..96,75..100,700;12..96,75..100,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip" href="#charter">Skip to content</a>
+
+<main>
+
+  <!-- ─── CHARTER ─────────────────────────────────────────── -->
+  <section class="charter" id="charter">
+    <div class="wrap">
+
+      <header class="charter-head">
+        <h1>Alex&nbsp;Scholtes</h1>
+        <p class="charter-role">Software engineer<span class="sep">/</span>Indianapolis</p>
+      </header>
+
+      <dl class="charter-body">
+        <div class="charter-row">
+          <dt>Job</dt>
+          <dd>Ship product in a production Rails monolith that a few hundred businesses log into every day.</dd>
+        </div>
+        <div class="charter-row">
+          <dt>Produces</dt>
+          <dd>Merged pull requests &mdash; and the tooling that makes the next one faster.</dd>
+        </div>
+        <div class="charter-row is-never">
+          <dt>Never</dt>
+          <dd>Ships what he can&rsquo;t explain. Or explains what he hasn&rsquo;t shipped.</dd>
+        </div>
+      </dl>
+
+      <p class="charter-note">
+        That last line is borrowed from my own tooling. Every agent I run has a job, a thing
+        it produces, and an explicit list of what it is not allowed to do. It turns out to be a
+        good way to describe an engineer too.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ─── LEDGER ──────────────────────────────────────────── -->
+  <section class="ledger" id="ledger" aria-labelledby="ledger-h">
+    <div class="wrap">
+
+      <p class="eyebrow">Evidence</p>
+      <h2 id="ledger-h">Six months of shipping, one bar per merged pull request.</h2>
+      <p class="lede">
+        Every bar below is a real change that went to production between March and August 2026.
+        Colour is the kind of change. Height is how many landed that week. This is the whole record,
+        not the highlight reel.
+      </p>
+
+      <figure class="chart">
+        <div class="chart-metrics" id="metrics"></div>
+        <div class="chart-plot" id="plot" role="img"
+             aria-label="Weekly stacked chart of 115 merged pull requests from March to August 2026, coloured by change type."></div>
+        <div class="chart-axis" id="axis"></div>
+        <figcaption class="chart-legend" id="legend"></figcaption>
+      </figure>
+
+      <p class="chart-fineprint">
+        Pulled from the repository&rsquo;s git history at build time. Ticket numbers and change
+        titles are my employer&rsquo;s, so they stay off this page &mdash; the shape and the counts are mine.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ─── TIER 01 · PRODUCTION ────────────────────────────── -->
+  <section class="tier" id="production" aria-labelledby="prod-h">
+    <div class="wrap">
+
+      <p class="eyebrow"><span class="tier-num">01</span>Work that carries load</p>
+      <h2 id="prod-h">Liftify</h2>
+      <p class="lede">
+        A multi-tenant reputation and customer-experience platform for home-service businesses.
+        Rails&nbsp;7.2 monolith, PostgreSQL, Sidekiq, Hotwire, event-sourced domain layer.
+        I joined in March 2026 and have been the primary engineer on its ticketing and
+        automations subsystems since.
+      </p>
+
+      <div class="stat-row">
+        <div class="stat"><span class="stat-n">115</span><span class="stat-l">pull requests merged</span></div>
+        <div class="stat"><span class="stat-n">61k</span><span class="stat-l">lines added</span></div>
+        <div class="stat"><span class="stat-n">13k</span><span class="stat-l">lines deleted</span></div>
+        <div class="stat"><span class="stat-n">6</span><span class="stat-l">months</span></div>
+      </div>
+
+      <ul class="work-list">
+        <li>
+          <h3>An append-only history of every status and assignment change</h3>
+          <p>Support kept asking &ldquo;who moved this, and when.&rdquo; I added an immutable history
+          table written from model callbacks, so the answer is a query instead of a guess &mdash;
+          and the analytics team could report on it without touching application code.</p>
+        </li>
+        <li>
+          <h3>A generic time trigger for the automations engine</h3>
+          <p>The rules engine could only react to things happening. It could not react to things
+          <em>not</em> happening. I added an elapsed-time trigger as a first-class condition, which
+          turned &ldquo;notify me when a ticket has sat untouched for two days&rdquo; from a feature
+          request into a configuration change.</p>
+        </li>
+        <li>
+          <h3>Custom-field conditions, built once for every rule type</h3>
+          <p>The ask was custom-field conditions on one kind of rule. Building it there would have
+          meant building it four more times later. I pushed the condition loading down into the
+          shared rule processor instead, so every current and future rule context got it in the
+          same commit.</p>
+        </li>
+        <li>
+          <h3>Location-scoped access control on the paths that leaked</h3>
+          <p>Users were scoped to their locations on the pages, but not on assign, watch, and
+          mention. Those three paths let you reach a person you were not supposed to see. I closed
+          them against the existing scoping concern rather than adding a fourth check.</p>
+        </li>
+        <li>
+          <h3>Notification coalescing, then digests</h3>
+          <p>A bulk import could fire several hundred instant notifications at one person. I made
+          every instant notification type coalescable, then added scheduled digest delivery on top
+          of the same mechanism.</p>
+        </li>
+        <li>
+          <h3>A ranking query that got slower every month</h3>
+          <p>Contact ranking aggregated the full touchpoint history &mdash; a table that only grows.
+          Bounding it to a rolling twelve-month window cut the work without changing a single
+          result any user would notice.</p>
+        </li>
+      </ul>
+
+      <p class="tier-note">
+        Private repository, so there is no code to link. Happy to walk through any of it in detail.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ─── TIER 02 · TOOLING ───────────────────────────────── -->
+  <section class="tier tier-alt" id="tooling" aria-labelledby="tool-h">
+    <div class="wrap">
+
+      <p class="eyebrow"><span class="tier-num">02</span>Tools I built to ship faster</p>
+      <h2 id="tool-h">The machine around the work</h2>
+      <p class="lede">
+        The throughput above is not heroics. It is tooling. Most of what I have built for myself in
+        the last year is infrastructure for working with coding agents &mdash; giving them narrow
+        jobs, hard boundaries, and somewhere to hand work off.
+      </p>
+
+      <div class="cards">
+
+        <article class="card card-wide">
+          <div class="card-head">
+            <h3>FPS</h3>
+            <p class="card-kicker">Five agent sessions, five jobs, five lists of things they may not do</p>
+            <p class="card-meta"><span>Python</span><span>1.5k LOC</span><span>Public</span></p>
+          </div>
+          <p>
+            One coding agent asked to do everything does everything badly. FPS splits the work
+            across five concurrent sessions with fixed charters and enforced boundaries: one builds
+            and stops at a draft, one holds the day&rsquo;s state, one takes existing work through
+            review to merged, one watches services, one turns finished work into explanations.
+          </p>
+          <div class="roles">
+            <span class="role" data-r="forge"><i></i>forge<em>builds &mdash; never lands</em></span>
+            <span class="role" data-r="pilot"><i></i>pilot<em>orients &mdash; never codes</em></span>
+            <span class="role" data-r="shepherd"><i></i>shepherd<em>lands &mdash; never starts</em></span>
+            <span class="role" data-r="warden"><i></i>warden<em>watches &mdash; never fixes</em></span>
+            <span class="role" data-r="mentor"><i></i>mentor<em>teaches &mdash; never flatters</em></span>
+          </div>
+          <p>
+            The constraint is the whole idea. A session that cannot land its own work has to write a
+            handoff good enough for another session to land it &mdash; which is the same document a
+            human reviewer needed all along.
+          </p>
+          <a class="link" href="https://github.com/arscholtes/fps">arscholtes/fps<span aria-hidden="true">&nbsp;&rarr;</span></a>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h3>Five code-review agents</h3>
+            <p class="card-kicker">Reviewers with one question each</p>
+            <p class="card-meta"><span>Private</span></p>
+          </div>
+          <p>
+            A general &ldquo;review this&rdquo; prompt returns nitpicks. Each of these asks exactly one
+            thing and produces evidence for its answer: does it break, was it built at the right
+            level, does something like it already exist, will the query survive production scale,
+            will anyone maintain it.
+          </p>
+          <p class="card-foot">
+            The reuse gate is the one that earns its keep. Before it, my most common review comment
+            was some version of <em>we already have this.</em>
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h3>Standup planner</h3>
+            <p class="card-kicker">A deterministic core with a language model on the outside</p>
+            <p class="card-meta"><span>Python</span><span>4.7k LOC</span><span>Private</span></p>
+          </div>
+          <p>
+            Pulls the open cycle, my pull requests, and my calendar, then ranks the day and lays out
+            focus blocks. The ranking is plain tested Python, not a prompt &mdash; a model that
+            reorders your priorities differently every morning is worse than no planner at all. The
+            model gathers and narrates; it does not decide.
+          </p>
+          <p class="card-foot">Writes blocks to the calendar only after I say yes.</p>
+        </article>
+
+        <article class="card card-wide">
+          <div class="card-head">
+            <h3>Twenty-two agent skills</h3>
+            <p class="card-kicker">The repeatable parts of the job, written down once</p>
+            <p class="card-meta"><span>Private</span></p>
+          </div>
+          <p>
+            Technical briefs, adversarial design debate, plan execution with a convergence loop,
+            branch review, migration scaffolding, runtime verification in a real browser. Each one
+            is a procedure I had already run by hand enough times to know its shape.
+          </p>
+          <p class="card-foot">
+            Writing a skill is mostly an exercise in noticing you have a procedure at all.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TIER 03 · CURIOSITY ─────────────────────────────── -->
+  <section class="tier" id="built" aria-labelledby="built-h">
+    <div class="wrap">
+
+      <p class="eyebrow"><span class="tier-num">03</span>Built because I wanted it to exist</p>
+      <h2 id="built-h">Things with an audience of one</h2>
+      <p class="lede">
+        Not everything needs users. These are the projects where I wanted the artifact more than the
+        audience &mdash; which is also how I learn a platform I have not shipped on before.
+      </p>
+
+      <div class="cards cards-3">
+
+        <article class="card">
+          <div class="card-head">
+            <h3>LearnerLens</h3>
+            <p class="card-kicker">A browser extension that watches how you study</p>
+            <p class="card-meta"><span>Chrome MV3</span><span>5.0k LOC</span><span>Public</span></p>
+          </div>
+          <p>
+            Scores focus in real time from time-on-task against tab-switching, classifies what you
+            are looking at, and detects flow states so it knows to leave you alone. Every byte stays
+            in local browser storage &mdash; a study tracker that phones home is a surveillance tool.
+          </p>
+          <a class="link" href="https://github.com/arscholtes/learner_lense">arscholtes/learner_lense<span aria-hidden="true">&nbsp;&rarr;</span></a>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h3>Momentum</h3>
+            <p class="card-kicker">An alarm and a calendar that share a codebase</p>
+            <p class="card-meta"><span>SwiftUI</span><span>3.0k LOC</span><span>Public</span></p>
+          </div>
+          <p>
+            Two SwiftUI apps running from one shared source tree across iOS and macOS, wired into
+            App Intents so the system can trigger them. Built to learn where Apple&rsquo;s
+            multi-platform story actually holds and where it quietly stops.
+          </p>
+          <a class="link" href="https://github.com/arscholtes/momentumalarm">arscholtes/momentumalarm<span aria-hidden="true">&nbsp;&rarr;</span></a>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h3>Recomp Tracker</h3>
+            <p class="card-kicker">A projection engine over my own health export</p>
+            <p class="card-meta"><span>Next.js</span><span>1.2k LOC</span><span>Private</span></p>
+          </div>
+          <p>
+            Reads an Apple Health export and projects body composition forward with best and worst
+            case bands, including where metabolic adaptation flattens the curve. The interesting
+            part was making the model&rsquo;s assumptions adjustable instead of hiding them behind
+            one confident number.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ─────────────────────────────────────────── -->
+  <footer class="foot" id="contact">
+    <div class="wrap">
+      <p class="eyebrow">Get in touch</p>
+      <h2>Currently shipping. Always reading.</h2>
+      <ul class="foot-links">
+        <li><a href="mailto:arscholtes@gmail.com">arscholtes@gmail.com</a></li>
+        <li><a href="https://github.com/arscholtes">github.com/arscholtes</a></li>
+      </ul>
+      <p class="foot-fine">
+        Built by hand. No framework, no build step, no dependencies &mdash; the chart is drawn from a
+        JSON file generated out of git history.
+      </p>
+    </div>
+  </footer>
+
+</main>
+
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
