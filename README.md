@@ -25,7 +25,7 @@ The chart is generated from real git history, not hand-maintained. Point the
 script at a repo and an author email:
 
 ```bash
-python3 tools/build-ledger.py ~/Developer/liftify/liftify arscholtes@gmail.com
+python3 tools/build-ledger.py /path/to/repo you@example.com
 ```
 
 It writes `data/ledger.json` and rewrites the `PRS` constant at the top of
