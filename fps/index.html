@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="FPS is five Claude Code sessions running at once, each with a fixed job and an explicit list of things it does not do."
+    />
+    <title>FPS — The system is the constraint</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="site-header" aria-label="FPS introduction">
+        <a class="wordmark" href="/" aria-label="FPS home">
+          <span class="wordmark-mark" aria-hidden="true">/</span>
+          <span>FPS</span>
+        </a>
+        <p class="header-note">five sessions<br />one direction</p>
+      </header>
+
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-kicker">
+          <span class="kicker-line" aria-hidden="true"></span>
+          <span>Forge · Pilot · Shepherd · Warden · Mentor</span>
+        </div>
+        <h1 id="page-title">The system<br /><em>is</em> the constraint.</h1>
+        <div class="hero-bottom">
+          <p class="hero-description">
+            Five Claude Code sessions running at once. Each has a fixed job,
+            a defined output, and a list of things it will never do.
+          </p>
+          <p class="hero-index" aria-label="Five roles">01—05</p>
+        </div>
+      </section>
+
+      <section class="roles-section" aria-labelledby="roles-heading">
+        <div class="section-heading">
+          <p class="section-label" id="roles-heading">The five roles</p>
+          <p class="section-note">Select a session to inspect its charter</p>
+        </div>
+
+        <div class="role-grid">
+          <article class="role-card is-open" data-role="forge" style="--role-color: #a4d65e">
+            <button class="role-toggle" aria-expanded="true" aria-controls="forge-details">
+              <span class="role-number">01</span>
+              <span class="role-name">forge</span>
+              <span class="role-dot" aria-hidden="true"></span>
+              <span class="toggle-symbol" aria-hidden="true">−</span>
+            </button>
+            <div class="role-details" id="forge-details">
+              <div class="detail-block">
+                <p class="detail-label">Job</p>
+                <p>Take an idea from nothing to a draft PR. Research, design, implement, test.</p>
+              </div>
+              <div class="detail-block">
+                <p class="detail-label">Produces</p>
+                <p>Draft PRs<br />Tech briefs<br />Design docs</p>
+              </div>
+              <div class="never-block">
+                <p class="detail-label">Never</p>
+                <p>Marks a PR ready for review.<br />Lands or merges anything.<br />Works through review feedback, including on its own PRs.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="role-card" data-role="pilot" style="--role-color: #75aef4">
+            <button class="role-toggle" aria-expanded="false" aria-controls="pilot-details">
+              <span class="role-number">02</span>
+              <span class="role-name">pilot</span>
+              <span class="role-dot" aria-hidden="true"></span>
+              <span class="toggle-symbol" aria-hidden="true">+</span>
+            </button>
+            <div class="role-details" id="pilot-details" hidden>
+              <div class="detail-block">
+                <p class="detail-label">Job</p>
+                <p>Answer “where am I”, “what should I be doing”, and “what am I forgetting”. Hold the state the human cannot hold in their head.</p>
+              </div>
+              <div class="detail-block">
+                <p class="detail-label">Produces</p>
+                <p>Decisions and answers</p>
+              </div>
+              <div class="never-block">
+                <p class="detail-label">Never</p>
+                <p>Writes application code, not even a one-liner.<br />Orchestrates the other sessions.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="role-card" data-role="shepherd" style="--role-color: #ef6a66">
+            <button class="role-toggle" aria-expanded="false" aria-controls="shepherd-details">
+              <span class="role-number">03</span>
+              <span class="role-name">shepherd</span>
+              <span class="role-dot" aria-hidden="true"></span>
+              <span class="toggle-symbol" aria-hidden="true">+</span>
+            </button>
+            <div class="role-details" id="shepherd-details" hidden>
+              <div class="detail-block">
+                <p class="detail-label">Job</p>
+                <p>Take an open PR and get it landed. Run review, triage findings, apply fixes, answer reviewers, keep CI green.</p>
+              </div>
+              <div class="detail-block">
+                <p class="detail-label">Produces</p>
+                <p>Merged work</p>
+              </div>
+              <div class="never-block">
+                <p class="detail-label">Never</p>
+                <p>Starts new work or a new branch.<br />Marks an issue done.<br />Force-pushes over someone else’s work.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="role-card" data-role="warden" style="--role-color: #b78fe5">
+            <button class="role-toggle" aria-expanded="false" aria-controls="warden-details">
+              <span class="role-number">04</span>
+              <span class="role-name">warden</span>
+              <span class="role-dot" aria-hidden="true"></span>
+              <span class="toggle-symbol" aria-hidden="true">+</span>
+            </button>
+            <div class="role-details" id="warden-details" hidden>
+              <div class="detail-block">
+                <p class="detail-label">Job</p>
+                <p>Keep the machine’s development stack visible: containers, servers, workers, ports, logs. Notice problems early and name them precisely.</p>
+              </div>
+              <div class="detail-block">
+                <p class="detail-label">Produces</p>
+                <p>Notices</p>
+              </div>
+              <div class="never-block">
+                <p class="detail-label">Never</p>
+                <p>Fixes application code.<br />Restarts or kills anything without being asked.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="role-card" data-role="mentor" style="--role-color: #64d5d8">
+            <button class="role-toggle" aria-expanded="false" aria-controls="mentor-details">
+              <span class="role-number">05</span>
+              <span class="role-name">mentor</span>
+              <span class="role-dot" aria-hidden="true"></span>
+              <span class="toggle-symbol" aria-hidden="true">+</span>
+            </button>
+            <div class="role-details" id="mentor-details" hidden>
+              <div class="detail-block">
+                <p class="detail-label">Job</p>
+                <p>Turn work that already happened into understanding.</p>
+              </div>
+              <div class="detail-block">
+                <p class="detail-label">Produces</p>
+                <p>Explanations</p>
+              </div>
+              <div class="never-block">
+                <p class="detail-label">Never</p>
+                <p>Writes code.<br />Pads.<br />Flatters.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+        <p class="roles-caption"><span aria-hidden="true">↳</span> Work travels left to right</p>
+      </section>
+
+      <section class="argument-section" aria-labelledby="argument-heading">
+        <div class="argument-intro">
+          <p class="section-label" id="argument-heading">The design argument</p>
+          <p class="argument-mark" aria-hidden="true">02</p>
+        </div>
+        <div class="argument-copy">
+          <p class="lead-copy">
+            Most multi-session setups are <strong>task-parallel</strong>:
+            N sessions on N tickets. That reliably hits the review queue as
+            its ceiling, because generation parallelises and human review does not.
+          </p>
+          <div class="copy-columns">
+            <div>
+              <p>
+                Role separation is cheaper because the sessions produce
+                <strong>different output types.</strong> Only forge generates
+                diff. Pilot produces answers; shepherd produces merges. They
+                do not compete for the same scarce resource.
+              </p>
+            </div>
+            <div>
+              <p>
+                The cost is different too. The risk is not throughput, it is
+                <strong>drift</strong> — whichever session happens to be
+                focused absorbing whatever you just thought of. The charters
+                exist for that.
+              </p>
+            </div>
+          </div>
+          <aside class="callout">
+            <span class="callout-rule" aria-hidden="true"></span>
+            <p>
+              The “never” list is not documentation after the fact. It is the
+              shape of the system.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="closing-section" aria-labelledby="closing-heading">
+        <p class="section-label" id="closing-heading">The most important line</p>
+        <blockquote>
+          <span class="quote-mark" aria-hidden="true">“</span>
+          <p>
+            A coordinator role with nothing to build reliably invents
+            coordination to do.
+          </p>
+          <footer>
+            <span class="closing-role"><span aria-hidden="true"></span>pilot</span>
+            <span>on what it will never do</span>
+          </footer>
+        </blockquote>
+      </section>
+
+      <footer class="site-footer">
+        <span>FPS / 2026</span>
+        <span>constraints make the system</span>
+      </footer>
+    </main>
+    <script src="/script.js"></script></body>
+</html>
