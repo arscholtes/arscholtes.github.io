@@ -288,6 +288,13 @@ h2{
 .card em{ color:var(--bone); font-style:italic; }
 .card-foot{ margin-top:auto !important; padding-top:.35rem; }
 
+/* Stands where a repo link would, for a card whose repository is private. */
+.card-note{
+  margin-top:auto; align-self:flex-start;
+  font-family:var(--mono); font-size:.76rem; letter-spacing:.06em;
+  color:var(--bone); opacity:.62;
+}
+
 .link{
   margin-top:auto; align-self:flex-start; max-width:100%;
   overflow-wrap:anywhere;
