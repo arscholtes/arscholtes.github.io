@@ -2,3 +2,4 @@
 
 # Visual brainstorming session files
 .superpowers/
+__pycache__/

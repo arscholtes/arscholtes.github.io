@@ -371,3 +371,45 @@ h2{
   .chart-plot{ min-height:150px; }
   .stat-row{ grid-template-columns:repeat(2,1fr); }
 }
+
+/* ══ blog ════════════════════════════════════════════════ */
+.blog{ padding:clamp(2.5rem,8vh,5rem) 0 clamp(4rem,10vh,7rem); }
+.blog-nav{
+  font-family:var(--mono); font-size:.76rem; letter-spacing:.06em;
+  margin:0 0 clamp(2.5rem,8vh,4.5rem);
+}
+.blog-nav a{ color:var(--dim); text-decoration:none; border-bottom:1px solid var(--line); }
+.blog-nav a:hover{ color:var(--pilot); border-color:var(--pilot); }
+.blog-nav .sep{ color:var(--dimmer); padding-inline:.6rem; }
+
+.blog-title,
+.post h1{
+  font-family:var(--display); font-weight:800;
+  font-size:clamp(2rem,1.3rem + 3vw,3.4rem);
+  font-variation-settings:"wdth" 88;
+  line-height:1.05; letter-spacing:-.02em;
+  margin:0 0 2rem; max-width:22ch; text-wrap:balance;
+}
+
+.post-list{ list-style:none; margin:0; padding:0; max-width:46rem; }
+.post-list li{ border-top:1px solid var(--line); padding:1.4rem 0; }
+.post-list a{ display:flex; flex-direction:column; gap:.35rem; color:var(--bone); text-decoration:none; }
+.post-list time{ font-family:var(--mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); }
+.post-list-title{ font-family:var(--display); font-weight:700; font-size:1.35rem; line-height:1.2; }
+.post-list a:hover .post-list-title{ color:var(--pilot); }
+.post-list p{ margin:.5rem 0 0; color:var(--dim); max-width:60ch; }
+
+.post{ max-width:42rem; }
+.post h2{ font-size:clamp(1.4rem,1.1rem + 1.2vw,1.9rem); margin:2.5rem 0 1rem; max-width:none; }
+.post h3{ font-family:var(--display); font-size:1.2rem; margin:2rem 0 .75rem; }
+.post p, .post ul, .post ol, .post blockquote, .post pre, .post figure{ margin:0 0 1.25rem; }
+.post a{ color:var(--bone); text-decoration:none; border-bottom:1px solid var(--line); overflow-wrap:anywhere; }
+.post a:hover{ color:var(--pilot); border-color:var(--pilot); }
+.post code{ font-family:var(--mono); font-size:.88em; background:var(--ink-2); padding:.1em .35em; border-radius:3px; }
+.post pre{ background:var(--ink-2); border:1px solid var(--line); border-radius:4px; padding:1rem 1.1rem; overflow-x:auto; }
+.post pre code{ background:none; padding:0; font-size:.85rem; }
+.post blockquote{ border-left:2px solid var(--line); padding-left:1.1rem; color:var(--dim); }
+.post img{ max-width:100%; height:auto; border-radius:4px; }
+.video{ margin:0 0 1.5rem; }
+.video iframe{ display:block; width:100%; aspect-ratio:16/9; border:0; border-radius:4px; background:var(--ink-2); }
+.video figcaption{ font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; margin-top:.6rem; }

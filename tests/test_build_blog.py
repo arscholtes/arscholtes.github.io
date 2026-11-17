@@ -102,6 +102,8 @@ class RenderMarkdown(unittest.TestCase):
             html = blog.render_markdown(url)
             self.assertIn('src="https://www.youtube-nocookie.com/embed/-pwyPnAWb2U"', html, url)
             self.assertIn('href="https://youtu.be/-pwyPnAWb2U"', html, url)
+            # Without a referrer YouTube refuses to play the embed (its error 153).
+            self.assertIn('referrerpolicy="strict-origin-when-cross-origin"', html, url)
 
     def test_a_youtube_link_inside_a_sentence_stays_a_link(self):
         html = blog.render_markdown("Watch https://youtu.be/-pwyPnAWb2U first.")
